@@ -13,7 +13,7 @@ export default class ClienteServise{
         cli.telefone = req.body.telefone;
         cli.aniversario = req.body.aniversario;
         cli.endereco = req.body.endereco;
-        const rs = await this.cliRepository.Cadastrar(req);
-        return rs
+        const rs = await this.cliRepository.Cadastrar(cli);
+        return rs;
     }
 }
