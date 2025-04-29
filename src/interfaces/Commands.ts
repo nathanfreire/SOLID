@@ -1,5 +1,6 @@
-export default interface Commands{
-    cadastrar<T>(obj:T):T;
-    atualizar<T>(obj:T):T;
-    apagar(id:number):string;
+export default interface Commands <T>{
+    Cadastrar(obj:T):T;
+    Listar():T[];
+    Apagar(id:number):string;
+    Atualizar(obj:T):T;
 }
