@@ -1,6 +1,6 @@
-import Cliente from "../../classes/Cliente";
-import { conexao } from "../../database/config";
-import CommandsPessoa from "../CommandsPessoa";
+import Cliente from "../classes/Cliente";
+import { conexao } from "../database/config";
+import CommandsPessoa from "../interfaces/CommandsPessoa";
 import { resolve } from "path";
 
 export default class ClienteRepository implements CommandsPessoa<Cliente> {
@@ -15,6 +15,7 @@ export default class ClienteRepository implements CommandsPessoa<Cliente> {
         return new Promise((resolve, reject) => {
             //Antes de cadastrar um cliente temos de cadastrar o endereço deste cliente e então obtemos o id 
             //do endereço cadastrado e alocamos em uma variavel para depois inserir na tabela clientes, no campo id_endereco
+            let id_end:any;
             conexao.query("INSERT INTO  endereco (tipo_logradouro,logradouro,numero,complemento,cep,bairro) Values (?,?,?,?,?,?)", [obj.endereco.tipo_logradouro,
                 obj.endereco.logradouro,
                 obj.endereco.numero,
@@ -22,10 +23,15 @@ export default class ClienteRepository implements CommandsPessoa<Cliente> {
                 obj.endereco.cep,
                 obj.endereco.bairro],
                 (erro,end)=>{
-                                      
-                }
+                    if(erro){
+                        return reject(erro)
+                    }
+                    else{
+                       // id_end = end.insertId;
+                    }
+                
 
-            conexao.query("INSERT INTO  cliente SET ?", obj, (error, result) => {
+            conexao.query("INSERT INTO cliente SET ?", obj, (error, result) => {
                 if (error) {
                     return reject(error);
                 }
@@ -33,7 +39,7 @@ export default class ClienteRepository implements CommandsPessoa<Cliente> {
                     return resolve(obj)
                 }
             })
-
+        })
         })
     }
     Listar(): Promise<Cliente[]> {

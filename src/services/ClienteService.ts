@@ -1,8 +1,13 @@
-import {Request, Response} from "express";
+
 import Cliente from "../classes/Cliente";
-import ClienteRepository from "../interfaces/repositories/ClienteRepository";
+import ClienteRepository from "../repositories/ClienteRepository";
+import { Request, Response } from "express-serve-static-core";
+import { ParsedQs } from "qs";
 
 export default class ClienteServise{
+    listarAutor(req: Request<{}, any, any, ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>, number>) {
+        throw new Error("Method not implemented.");
+    }
 
     cliRepository = new ClienteRepository();
     async cadastroCliente(req:Request, res:Response){
