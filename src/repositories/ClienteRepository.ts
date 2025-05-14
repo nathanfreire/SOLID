@@ -22,16 +22,22 @@ export default class ClienteRepository implements CommandsPessoa<Cliente> {
                 obj.endereco.complemento,
                 obj.endereco.cep,
                 obj.endereco.bairro],
-                (erro,end)=>{
+                (erro,end:any)=>{
                     if(erro){
                         return reject(erro)
                     }
                     else{
-                       // id_end = end.insertId;
+                        id_end = end.insertId;
                     }
                 
 
-            conexao.query("INSERT INTO cliente SET ?", obj, (error, result) => {
+            conexao.query("INSERT INTO cliente(nome,cpf,email,telefone,id_endereco,aniversario) values (?,?,?,?,?,?)", [obj.nome,
+                obj.cpf,
+                obj.email,
+                obj.telefone,
+                id_end,
+                obj.aniversario],
+            (error, result) => {
                 if (error) {
                     return reject(error);
                 }
@@ -59,7 +65,7 @@ export default class ClienteRepository implements CommandsPessoa<Cliente> {
     Atualizar(obj: Cliente): Promise<Cliente> {
         throw new Error("Method not implemented.");
     }
-    PesquisarId(id: string): Promise<Cliente> {
+    PesquisarId(id: number): Promise<Cliente> {
         throw new Error("Method not implemented.");
     }
 

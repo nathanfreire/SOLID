@@ -3,5 +3,5 @@ export default interface Commands <T>{
     Listar():Promise<T[]>;
     Apagar(id:number):Promise<string>;
     Atualizar(obj:T):Promise<T>;
-    PesquisarId(id:string):Promise<T>;
+    PesquisarId(id:number):Promise<T>;
 }

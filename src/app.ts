@@ -12,23 +12,40 @@ const cli = new ClienteServise();
 const aut = new AutorService();
 const fun = new FuncionarioService();
 
+
+// ##################### cliente #################
 app.get("/api/v1/cliente/listar",(req,res)=>{
     cli.listarClientes(req,res);
 })
-
-app.get("/api/v1/autor/listar",(req,res)=>{
-    aut.listarAutor(req,res);
-})
-
-app.get("/api/v1/funcionario/listar",(req,res)=>{
-    fun.listarFuncionarios(req,res);
-})
-
 
 app.post("/api/v1/cliente/cadastro",(req,res)=>{
     cli.cadastroCliente(req,res);
 })
 
+
+// ##################### autor #################
+
+app.get("/api/v1/autor/listar",(req,res)=>{
+    aut.listarAutores(req,res);
+})
+
+app.post("/api/v1/autor/cadastro",(req,res)=>{
+    aut.cadastroAutor(req,res);
+})
+
+// ##################### funcionario #################
+
+
+app.get("/api/v1/funcionario/listar",(req,res)=>{
+    fun.listarFuncionarios(req,res);
+})
+
+app.post("/api/v1/funcionario/cadastro",(req,res)=>{
+   fun.cadastroFuncionario(req,res);
+})
+
+
+// ######################################
 app.listen(5000,()=>{
     console.log(`Online em: http://127.0.0.1:5000`)
 })
