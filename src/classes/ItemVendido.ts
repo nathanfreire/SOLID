@@ -6,4 +6,5 @@ export default class ItemVendido{
     venda!: Venda;
     produto!: Produto;
     quantidade!: number;
+
 }

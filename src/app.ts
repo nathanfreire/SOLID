@@ -5,6 +5,9 @@ import AutorService from "./services/AutorService";
 import FuncionarioService from "./services/FuncionarioService";
 import ProdutoService from "./services/ProdutoService";
 import VendaService from "./services/VendaService";
+import ItemVendido from "./classes/ItemVendido";
+import ItemVendidoService from "./services/ItemVendidoService";
+import PagamentoService from "./services/PagamentoService";
 
 const app = express();
 app.use(express.json());
@@ -15,6 +18,9 @@ const aut = new AutorService();
 const fun = new FuncionarioService();
 const prod = new ProdutoService();
 const ven = new VendaService();
+const itn = new ItemVendidoService();
+const pag = new PagamentoService();
+
 
 // ##################### cliente #################
 app.get("/api/v1/cliente/listar",(req,res)=>{
@@ -66,6 +72,26 @@ app.get("/api/v1/venda/listar",(req,res)=>{
 
 app.post("/api/v1/venda/cadastro",(req,res)=>{
    ven.cadastroVenda(req,res);
+})
+
+// ##################### itemvendido #################
+
+app.get("/api/v1/itemvendido/listar",(req,res)=>{
+    itn.listarItemVendidos(req,res);
+})
+
+app.post("/api/v1/itemvendido/cadastro",(req,res)=>{
+   itn.cadastroItemVendido(req,res);
+})
+
+// ##################### pagamento #################
+
+app.get("/api/v1/pagamento/listar",(req,res)=>{
+    pag.listarPagamentos(req,res);
+})
+
+app.post("/api/v1/pagamento/cadastro",(req,res)=>{
+   pag.cadastroPagamento(req,res);
 })
 
 // ######################################
